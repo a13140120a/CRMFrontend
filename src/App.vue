@@ -1,30 +1,38 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+    <nav class="navbar navbar-dark bg-dark navbar-custom">
+        <a class="navbar-brand" href="#">
+          Light color background
+      </a>
+    </nav>
+    <div style="height: 240px; text-align: center; padding-top: 80px;" >
+        <p class="fs-1">Login</p>
+    </div>
+    <div class="container mh-100">
+        <div class="row align-items-start">
+
+            <router-view></router-view>
+        </div>
+     </div>
 </template>
 
+<script>
+import { onBeforeMount } from 'vue';
+import store from '@/store/index';
+import Login from './views/Login.vue';
+
+export default {
+    components: {
+        Login,
+    },
+    setup() {
+    },
+}
+</script>
+
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+.navbar-custom {
+  height: 80px;
 }
 
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>
