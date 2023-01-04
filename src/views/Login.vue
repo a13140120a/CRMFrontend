@@ -25,16 +25,48 @@
 
 <script>
 import { defineComponent, ref, reactive, watch, onMounted, computed } from 'vue';
+import { mapActions, mapMutations, useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 export default {
     setup() {
         const count = ref(0);
         const isValid = ref(false);
         const email = ref(null);
         const password = ref(null);
+        const store = useStore();
+        const router = useRouter();
+
+        const doLogin = (formState) => {
+            store.dispatch('http/post', {
+                api: "api/admin/login",
+                json: formState
+            })
+                .then((data) => {
+                    if (Object.prototype.hasOwnProperty.call(data, "status")) {
+                        console.log(data);
+                        if (data.status){
+                            store.commit('member/loginRequest', data)
+                            router.push({ name: "Home" })  // actions
+                        }else if (data.error==='5'){
+                            alert('帳號或密碼錯誤');
+                        }
+                    } else {
+                        console.log('login fail: ', data)
+                        alert('發生某種錯誤');
+                    }
+                })
+        }
+
         const validate = () => {
             /* some validate */
             if (email.value==null || password.value==null){
                 isValid.value = true;
+            }
+            else {
+                doLogin({
+                    email: email.value,
+                    password: password.value,
+                });
             }
 
         }
@@ -50,7 +82,6 @@ export default {
     },
 
     mounted() {
-        console.log(this.count) // 0
     }
 }
 
