@@ -20,8 +20,7 @@ const mutations = {
 }
 
 const beforeApiCall = (method, api, json, ) => {
-    console.log('api called');
-    console.log('ip',axios.defaults.baseURL);
+    // console.log('api called');
 }
 
 const getHttpConfig = ({ rootState }) => {

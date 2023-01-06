@@ -1,10 +1,14 @@
 <template>
+    <div class="rainbow-text" style="height: 240px; text-align: center; padding-top: 80px; font-size:100px">
+        Login
+    </div>
     <div class="container">
         <div class="col-4 offset-4">
-            <form class="needs-validation" :class="{'was-validated': isValid}">
+            <form class="needs-validation" :class="{ 'was-validated': isValid }">
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Your@email.com" v-model="email" required>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                        placeholder="Your@email.com" v-model="email" required>
                     <div class="invalid-feedback">Please enter a email.</div>
                     <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                 </div>
@@ -44,10 +48,10 @@ export default {
                 .then((data) => {
                     if (Object.prototype.hasOwnProperty.call(data, "status")) {
                         console.log(data);
-                        if (data.status){
+                        if (data.status) {
                             store.commit('member/loginRequest', data)
                             router.push({ name: "Home" })  // actions
-                        }else if (data.error==='5'){
+                        } else if (data.error === '5') {
                             alert('帳號或密碼錯誤');
                         }
                     } else {
@@ -59,7 +63,7 @@ export default {
 
         const validate = () => {
             /* some validate */
-            if (email.value==null || password.value==null){
+            if (email.value == null || password.value == null) {
                 isValid.value = true;
             }
             else {
@@ -90,13 +94,10 @@ export default {
 </script>
 
 <style scoped>
-.custom-container-width {
-    max-width: 500px;
-}
-
-
-.control-label {
-    text-align: left !important;
-    /* !important added for priority in SO snippet. */
+.rainbow-text {
+  background-image: linear-gradient(to left, indigo, blue, green, yellow, orange, red);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  
 }
 </style>
