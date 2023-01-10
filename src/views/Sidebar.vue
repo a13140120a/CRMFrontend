@@ -95,12 +95,8 @@ export default {
             var elements = document.querySelectorAll('button,a');
             var bootstrap = require('bootstrap/dist/js/bootstrap.bundle.js');
             const tooltipTriggerList = Array.from(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-            console.log(elements)
             // var len = buttons.length;
             elements.forEach( element => element.className += " text-white")
-
-            console.log('hello~~')
-
             tooltipTriggerList.forEach(tooltipTriggerEl => {
                 new bootstrap.Tooltip(tooltipTriggerEl)
             });

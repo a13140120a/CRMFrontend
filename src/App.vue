@@ -15,6 +15,15 @@ export default {
         Navbar
     },
     setup() {
+        onBeforeMount(() => {
+            store.commit('member/initializeStore');
+            store.subscribe((mutation, state) => {
+                // Store the state object as a JSON string
+                console.log("init: ", JSON.stringify(state.member.user));
+                localStorage.setItem('member', JSON.stringify(state.member.user));
+                console.log("now :",JSON.parse(localStorage.getItem('member')));
+            });
+        })
     },
 }
 </script>
@@ -22,7 +31,6 @@ export default {
 
 <style>
 .navbar-custom {
-  height: 80px;
+    height: 80px;
 }
-
 </style>

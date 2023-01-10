@@ -34,11 +34,19 @@ export default {
         setAntMobile(state, formState) {
             state.setAntMobile = formState
         },
+        initializeStore(state) {
+            // Check if the ID exists
+            if(localStorage.getItem('member')) {
+                  // Replace the state object with the stored item
+              state.user = JSON.parse(localStorage.getItem('member'));
+            }
+    }
     },
     actions: {
         isLogin({ dispatch, commit, state }) {
             return new Promise((resolve, reject) => {
                 dispatch("http/get", { api: `/api/admin/verifyToken` }, { root: true }).then((data) => {
+                    console.log(data);
                     if (data.status) {
                         resolve(true);
                     } else {
